@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+python-multipart
+polars
+pandas
+geopandas
+shapely
+pyproj
+h3
+folium
+pyarrow
