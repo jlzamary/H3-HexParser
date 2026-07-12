@@ -1,55 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>H3 Hex Parser</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>H3 Hex Parser</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="styles.css">
+
 </head>
+
 <body>
 
-  <main class="container">
-    <!-- Content goes here in later steps -->
-     <header>
-        <hgroup>
-            <h1>H3 Hex Parser</h1>
-            <p>Upload a file, get an H3 hex map. Aggregate your data onto Uber's H3 grid and download the results — no setup required.</p>
-        </hgroup>
+    <!-- Banner Header -->
+    <header class="banner-container">
+        <img src="assets/H3-Hex-Parser.png" alt="Website Banner">
     </header>
 
-    <form id="upload-form">
-        <label for="file-input">
-            Choose a file (CSV, Parquet, or GeoJSON)
-            <input type="file" id="file-input" name="file" accept=".csv,.parquet,.geojson" required>
-        </label>
+  <main class="container">
+    <h1>H3 Hex Parser</h1>
+    <p>Easily parse and map in Uber's H3 grid, just upload a file</p>
 
-        <div class="grid">
-            <label for="agg-field">
-            Field to aggregate
-            <select id="agg-field" name="agg_field" disabled>
-                <option value="">Upload a file first</option>
-            </select>
-            </label>
-
-            <label for="hex-resolution">
-            Hex size
-            <select id="hex-resolution" name="hex_resolution">
-                <option value="7">City (res 7)</option>
-                <option value="9">Neighborhood (res 9)</option>
-                <option value="11">Block (res 11)</option>
-            </select>
-            </label>
-        </div>
-
-        <button type="submit">Generate Map</button>
-    </form>
-
-    <section id="map-output" aria-live="polite">
-  <!-- Map will be injected here after upload -->
+    <!-- Upload -->
+    <section>
+      <label for="file-input">Upload CSV or Parquet</label>
+      <input type="file" id="file-input" accept=".csv,.parquet">
     </section>
 
+    <!-- Column selection -->
+    <section id="column-selectors">
+      <!-- renderColumnSelectors() fills this in once /upload responds -->
+    </section>
 
+    <!-- Submit selections -->
+    <section>
+      <button id="process-btn" style="display:none;">Generate H3 Map</button>
+    </section>
   </main>
 
   <script src="app.js"></script>
