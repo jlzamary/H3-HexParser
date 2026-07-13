@@ -1,0 +1,21 @@
+id,name,latitude,longitude,value,category
+1,Point A,38.8895,-77.0353,42.5,restaurant
+2,Point B,38.8951,-77.0364,17.3,retail
+3,Point C,38.9072,-77.0369,88.1,restaurant
+4,Point D,38.8977,-77.0365,55.0,office
+5,Point E,38.9101,-77.0147,23.9,retail
+6,Point F,38.8816,-77.0910,64.2,office
+7,Point G,38.9296,-77.0197,12.7,restaurant
+8,Point H,38.8462,-77.3064,91.4,retail
+9,Point I,38.9807,-76.9369,33.6,office
+10,Point J,39.0458,-76.6413,77.8,restaurant
+11,Point K,38.9187,-77.2311,45.1,retail
+12,Point L,38.8339,-77.0851,29.0,office
+13,Point M,38.9535,-77.4166,66.6,restaurant
+14,Point N,38.7628,-77.1418,52.3,retail
+15,Point O,38.8600,-76.9317,19.9,office
+16,Point P,39.1043,-77.2242,84.5,restaurant
+17,Point Q,38.7796,-77.5316,38.0,retail
+18,Point R,38.9762,-77.0537,71.2,office
+19,Point S,38.8283,-77.2178,26.7,restaurant
+20,Point T,39.0836,-77.1483,59.4,retail
