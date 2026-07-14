@@ -1,2 +1,6 @@
-# Chache
-backend/__pychache__/*
+# Cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
