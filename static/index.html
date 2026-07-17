@@ -22,8 +22,8 @@
 
     <!-- Upload -->
     <section>
-      <label for="file-input">Upload CSV or Parquet</label>
-      <input type="file" id="file-input" accept=".csv,.parquet">
+      <label for="file-input">Upload CSV</label>
+      <input type="file" id="file-input" accept=".csv">
     </section>
 
     <!-- Column selection -->
@@ -31,9 +31,21 @@
       <!-- renderColumnSelectors() fills this in once /upload responds -->
     </section>
 
+    <!-- H3 resolution -->
+    <section id="resolution-section" style="display:none;">
+      <label for="resolution-input">H3 Resolution (0-15)
+        <input type="number" id="resolution-input" min="0" max="15" value="7">
+      </label>
+    </section>
+
     <!-- Submit selections -->
     <section>
       <button id="process-btn" style="display:none;">Generate H3 Map</button>
+    </section>
+
+    <!-- Map output -->
+    <section id="map-section">
+      <iframe id="map-frame" style="width:100%; height:600px; border:none; display:none;"></iframe>
     </section>
   </main>
 
