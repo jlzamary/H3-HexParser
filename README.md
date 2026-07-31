@@ -1,4 +1,4 @@
-![hexparsercoverimage](readme_files/hexBanner.png)
+![hexparsercoverimage](static/assets/hexBanner.png)
 
 ---
 # H3-HexParser
