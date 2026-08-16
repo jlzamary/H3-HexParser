@@ -2,24 +2,38 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>H3 Hex Parser</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>H3 Hex Parser</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="stylesheet" href="styles.css">
 
 </head>
 
 <body>
 
-    <!-- Banner Header -->
-    <header class="banner-container">
-        <img src="assets/H3-Hex-Parser.png" alt="Website Banner">
-    </header>
+  <!-- Banner Header -->
+  <header class="banner-container">
+    <img src="assets/hexBanner.png" alt="Website Banner">
+  </header>
 
   <main class="container">
-    <h1>H3 Hex Parser</h1>
-    <p>Easily parse and map in Uber's H3 grid, just upload a file</p>
+    <!-- <h1>H3 Hex Parser</h1>
+    <p>Easily parse and map in Uber's H3 grid, just upload a file</p> -->
 
+  <!-- Instructions and Use Cases -->
+   <section>
+    <h3>Instructions & Use Cases</h3>
+      <article id="article">
+        <p>
+          Upload a CSV file with latitude and longitude columns, select the appropriate columns, and generate an H3 map.
+          Ensure your file has been cleaned of outliers and is in the correct format.
+          Maps are generated with Folium and the sum of average values for each hexagon is displayed.
+        </p>
+        <footer>
+          <small>For more information, or to raise issues, visit the <a href="https://github.com/jlzamary/H3-HexParser">Github Repo</a>.</small>
+        </footer>
+      </article>
+    </section>
     <!-- Upload -->
     <section>
       <label for="file-input">Upload CSV</label>
@@ -49,6 +63,16 @@
     </section>
   </main>
 
-  <script src="app.js"></script>
+    <!-- Footer -->
+  <footer class="container">
+    <small
+      >Built by <a href="https://github.com/jlzamary">Jack Zamary</a> •
+      <a href="https://github.com/jlzamary/H3-HexParser"
+        >Source code</a> 
+    </small>
+  </footer>
+  <!-- ./ Footer -->
+
+  <script src="app.js?v=2"></script>
 </body>
 </html>
