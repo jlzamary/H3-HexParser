@@ -25,9 +25,33 @@ async function handleUpload(file) {
   document.getElementById("map-frame").style.display = "none";
 }
 
+// Find the first column whose name matches one of the given patterns
+function findColumnMatch(columns, patterns, exclude) {
+  for (const pattern of patterns) {
+    const match = columns.find(c => c.toLowerCase().includes(pattern) && c !== exclude);
+    if (match) return match;
+  }
+  return null;
+}
+
+function buildOptions(columns, selected) {
+  return columns
+    .map(c => `<option value="${c}"${c === selected ? " selected" : ""}>${c}</option>`)
+    .join("");
+}
+
 // Render columns
 function renderColumnSelectors(columns) {
-  const options = columns.map(c => `<option value="${c}">${c}</option>`).join("");
+  // Guess sensible lat/lon defaults by column name so the two dropdowns
+  // never silently default to the same column 
+  const latDefault = findColumnMatch(columns, ["lat", "Latitude", "latitude"], null) || columns[0];
+  const lonDefault =
+    findColumnMatch(columns, ["lon", "lng", "Longitude", "longitude"], latDefault) ||
+    columns.find(c => c !== latDefault) ||
+    columns[0];
+
+  const latOptions = buildOptions(columns, latDefault);
+  const lonOptions = buildOptions(columns, lonDefault);
 
   const sumCheckboxes = columns.map(c => `
     <label>
@@ -44,10 +68,10 @@ function renderColumnSelectors(columns) {
   const container = document.getElementById("column-selectors");
   container.innerHTML = `
     <label>Latitude column
-      <select id="lat-col">${options}</select>
+      <select id="lat-col">${latOptions}</select>
     </label>
     <label>Longitude column
-      <select id="lon-col">${options}</select>
+      <select id="lon-col">${lonOptions}</select>
     </label>
 
     <fieldset>
