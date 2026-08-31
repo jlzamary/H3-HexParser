@@ -3,9 +3,14 @@
 # Imports
 import uuid
 from datetime import datetime, timedelta
+from pathlib import Path
 from fastapi import FastAPI, UploadFile, HTTPException, status
-from converter import parse_file, compute_h3_and_boundaries, aggregate_to_hex, map_h3
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from converter import parse_file, compute_h3_and_boundaries, aggregate_to_hex, hex_value_fields, map_h3
 from pydantic import BaseModel
+
+STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 
 # Variables from user input
 class ProcessRequest(BaseModel):
@@ -29,7 +34,7 @@ async def upload_file(file: UploadFile):
     # Check file size
     file_size = len(file_bytes)
 
-    # Throw excpetion for files larger than 10mb
+    # Throw exception for files larger than 10mb
     MAX_FILE_SIZE = 10 * 1024 * 1024 
 
     if file_size > MAX_FILE_SIZE:
@@ -52,7 +57,7 @@ async def upload_file(file: UploadFile):
     # Return to frontend 
     return {"upload_id": upload_id, "columns": list(df.columns)}
 
-@app.post("/process")
+@app.post("/process", response_class=HTMLResponse)
 async def process_file(request: ProcessRequest):
     lat_col = request.lat_col
     lon_col = request.lon_col
@@ -78,8 +83,13 @@ async def process_file(request: ProcessRequest):
     df = aggregate_to_hex(df, h3_col="h3_index", boundary_col="boundary",
                           lat_col=lat_col, lon_col=lon_col, sum_cols=sum_cols, avg_cols=avg_cols,)
 
-    # Build the HTML map
-    output_map = map_h3(df, boundary_col="boundary", lat_col=lat_col, lon_col=lon_col)
+    # Build the HTML map, offering a toggle between count and each
+    # sum/avg column the user asked to aggregate
+    color_fields = hex_value_fields(sum_cols, avg_cols)
+    output_map = map_h3(df, boundary_col="boundary", lat_col=lat_col, lon_col=lon_col, color_fields=color_fields)
 
-    # Return the HTML representation of the map
-    return output_map._repr_html_()
+    # Return the map's own standalone HTML document
+    return output_map.get_root().render()
+
+# Serve the frontend (must be mounted last so it doesn't shadow the API routes above)
+app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")
